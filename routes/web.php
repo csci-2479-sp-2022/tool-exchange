@@ -22,6 +22,10 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
+Route::get('/tools', function () {
+    return view('tool-list');
+})->middleware(['auth'])->name('tools');
+
 require __DIR__.'/auth.php';
 
 Route::controller(ToolController::class)->group(function(){

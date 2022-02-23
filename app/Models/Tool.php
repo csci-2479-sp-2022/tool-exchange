@@ -8,15 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Tool extends Model
 {
     use HasFactory;
+
+    // define model attributes
     protected $fillable = [
-        'type',
-        'price',
-        'id'
+        'name',
+        'type'
     ];
 
+    // output fillable properties into a descriptive string
     public function toString() {
-        return "$this->type costs $$this->price.";
+        return $this->name .' is a ' . $this->type;
+
     }
-
-
 }

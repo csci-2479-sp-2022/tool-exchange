@@ -4,41 +4,25 @@ namespace App\Http\Controllers;
 
 use App\Models\Tool;
 use Illuminate\Http\Request;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Foundation\Bus\DispatchesJobs;
-use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Routing\Controller as BaseController;
 
-class ToolController extends Controller
-{
-    //this is controlle raction for the /games url of app
+class ToolController extends Controller {
+
+    // create action method to return tools view
     public function show(){
-        //controller action typically returns view
-        return view('tool-list', ['tools'=> self::getTools()]);
+        return view (
+            'tool',
+            [
+                'tool' => self::getTool(),
+            ]);
+            return null;
     }
 
-    public function view(int $id){
-        //controller action typically returns view
-        //return view('game-list', ['games'=> self::getGames()]);
-        return view('tool-view', ['tool'=>self::getToolById($id)]);
-    }
-
-    private static function getToolById(int $id):Tool
-     {
-        foreach(self::getTools() as $tool){
-            if($tool->id===$id){
-                return $tool;
-            }
-        }
-        return null;
-    }
-
-
-    private static function getTools(): array{
+    // method to return an array of tools
+    public static function getTool() {
         return [
-            Tool::make(['type' => 'hammer', 'price' => 8, 'id' => 1]),
-            Tool::make(['type' => 'saw', 'price' => 3.30, 'id' => 2]),
-            
+            Tool::make(['name' => 'Hammer','type' => 'hardware tool']),
+            Tool::make(['name' => 'Screwdriver','type' => 'hardware tool']),
+            Tool::make(['name' => 'Lawn Mower','type' => 'garden tool'])
         ];
     }
 }
