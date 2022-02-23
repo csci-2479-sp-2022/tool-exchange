@@ -21,4 +21,3 @@ class Tool extends Model
 
     }
 }
-
