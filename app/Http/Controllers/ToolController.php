@@ -35,10 +35,10 @@ class ToolController extends Controller
 
 
     private static function getTools(): array{
-        return [
-            Tool::make(['type' => 'hammer', 'price' => 8, 'id' => 1]),
-            Tool::make(['type' => 'saw', 'price' => 3.30, 'id' => 2]),
-            
-        ];
-    }
+       return [
+            Tool::make(['name' => 'Hammer','type' => 'hardware tool','id'=>'1']),
+            Tool::make(['name' => 'Screwdriver','type' => 'hardware tool','id'=>'2']),
+            Tool::make(['name' => 'Lawn Mower','type' => 'garden tool','id'=>'3'])
+        ]; 
+
 }

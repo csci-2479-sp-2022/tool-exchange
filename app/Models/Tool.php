@@ -9,14 +9,16 @@ class Tool extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'name',
         'type',
         'price',
         'id'
     ];
 
+
+    // output fillable properties into a descriptive string
     public function toString() {
-        return "$this->type costs $$this->price.";
+        return $this->name .' is a ' . $this->type;
+
     }
-
-
 }
