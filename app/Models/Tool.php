@@ -8,12 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Tool extends Model
 {
     use HasFactory;
-
-    // define model attributes
     protected $fillable = [
         'name',
-        'type'
+        'type',
+        'price',
+        'id'
     ];
+
 
     // output fillable properties into a descriptive string
     public function toString() {

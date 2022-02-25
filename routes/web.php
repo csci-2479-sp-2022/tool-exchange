@@ -22,13 +22,8 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-Route::get('/tools', function () {
-    return view('tool-list');
-})->middleware(['auth'])->name('tools');
-
-require __DIR__.'/auth.php';
-
 Route::controller(ToolController::class)->group(function(){
     Route::get('/tools', [ToolController::class, 'show']);
     Route::get('/tools/{id}', 'view');
 });
+require __DIR__.'/auth.php';
