@@ -40,5 +40,6 @@ class ToolController extends Controller
             Tool::make(['name' => 'Screwdriver','type' => 'hardware tool','id'=>'2']),
             Tool::make(['name' => 'Lawn Mower','type' => 'garden tool','id'=>'3'])
         ]; 
+    }
 
 }
