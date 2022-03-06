@@ -1,8 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Tool;
 use Illuminate\Http\Request;
+use App\Contracts\ToolService;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+
 
 class ToolController extends Controller {
 
