@@ -16,8 +16,7 @@ class Tool extends Model
     protected $fillable = [
         'name',
         'type'
-    ];
-
+      
     // output fillable properties into a descriptive string
     public function toString() {
         return $this->name .' is a ' . $this->type;
