@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ToolController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,3 +31,8 @@ Route::get('/tools', function () {
 })->middleware(['auth'])->name('tools');
 
 require __DIR__.'/auth.php';
+
+Route::controller(ToolController::class)->group(function(){
+    Route::get('/tools', [ToolController::class, 'show']);
+    Route::get('/tools/{id}', 'view');
+});
