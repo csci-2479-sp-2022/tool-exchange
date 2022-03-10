@@ -55,11 +55,11 @@ class ToolControllerTest extends TestCase {
        $this->toolServiceSpy->shouldReceive('getToolById')
         ->once()
         ->andReturn(
-            Tool::make(['name' => 'Lawn Mower','type' => 'garden tool','id'=>'3'])
+            Tool::make(['name' => 'Screwdriver','type' => 'hardware tool','id'=>'2'])
         );
 
         // act
-        $response = $this->get('/tools');
+        $response = $this->get('/tools/2');
 
         // assert
         $response->assertStatus(200);

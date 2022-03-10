@@ -8,7 +8,7 @@ class ToolService implements ToolInterface
 {
     public function getToolById(int $id): ?Tool
     {
-        foreach (self::getTools() as $tool) {
+        foreach ($this->getTools() as $tool) {
             if ($tool->id === $id) {
                 return $tool;
             }

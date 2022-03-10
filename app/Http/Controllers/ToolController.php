@@ -30,7 +30,7 @@ class ToolController extends Controller
         if ($tool == null) {
             throw new NotFoundHttpException();
         }
-        return view('tool-view', ['tool'=>($id)]);
+        return view('tool-view', ['tool'=> $tool]);
     }
 
     private function getToolById(int $id)
