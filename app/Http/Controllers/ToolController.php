@@ -1,36 +1,49 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Contracts\ToolInterface;
 use App\Models\Tool;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+
+use function PHPSTORM_META\type;
 
 class ToolController extends Controller
 {
+    public function __construct(private ToolInterface $toolService)
+    {
+
+    }
     //this is controlle raction for the /games url of app
     public function show(){
         //controller action typically returns view
-        return view('tool-list', ['tools'=> self::getTools()]);
+        return view('tool-list', ['tools'=> $this->toolService->getTools()]);
     }
 
     public function view(int $id){
         //controller action typically returns view
-        //return view('game-list', ['games'=> self::getGames()]);
-        return view('tool-view', ['tool'=>self::getToolById($id)]);
+        $tool = $this->toolService->getToolById($id);
+        if ($tool == null) {
+            throw new NotFoundHttpException();
+        }
+        return view('tool-view', ['tool'=>($id)]);
     }
 
-    private static function getToolById(int $id):Tool
-     {
-        foreach(self::getTools() as $tool){
-            if($tool->id===$id){
-                return $tool;
-            }
+    private function getToolById(int $id)
+    {
+        $tool = $this->toolService->getToolById($id);
+
+        if ($tool == null) {
+            throw new NotFoundHttpException();
         }
-        return null;
+
+        return view('tool-details', [
+            'tool' => $tool,
+        ]);
     }
 
 
@@ -39,7 +52,7 @@ class ToolController extends Controller
             Tool::make(['name' => 'Hammer','type' => 'hardware tool','id'=>'1']),
             Tool::make(['name' => 'Screwdriver','type' => 'hardware tool','id'=>'2']),
             Tool::make(['name' => 'Lawn Mower','type' => 'garden tool','id'=>'3'])
-        ]; 
+        ];
     }
 
 }
