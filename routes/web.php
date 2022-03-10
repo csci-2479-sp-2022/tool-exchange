@@ -26,4 +26,9 @@ Route::controller(ToolController::class)->group(function(){
     Route::get('/tools', [ToolController::class, 'show'])->name('tools');
     Route::get('/tools/{id}', 'view');
 });
+
+Route::get('/search-results', function () {
+    return view('search-results');
+});
+
 require __DIR__.'/auth.php';
