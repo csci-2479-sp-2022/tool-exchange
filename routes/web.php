@@ -23,7 +23,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 Route::controller(ToolController::class)->group(function(){
-    Route::get('/tools', [ToolController::class, 'show']);
+    Route::get('/tools', [ToolController::class, 'show'])->name('tools');
     Route::get('/tools/{id}', 'view');
 });
 
