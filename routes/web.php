@@ -29,8 +29,8 @@ Route::controller(ToolController::class)->group(function(){
 });
 
 Route::controller(AccountController::class)->group(function(){
-    Route::get('/tools', [AccountController::class, 'show'])->name('tools');
-    Route::get('/tools/{id}', 'view');
+    Route::get('/usertools', [AccountController::class, 'show'])->name('usertools');
+    Route::get('/usertools/{id}', 'view');
 });
 
 Route::get('/search-results', function () {

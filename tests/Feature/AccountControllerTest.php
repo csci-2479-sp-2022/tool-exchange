@@ -39,11 +39,11 @@ class AccountControllerTest extends TestCase {
             ]);
 
         // act
-        $response = $this->get('/tools');
+        $response = $this->get('/usertools');
 
         // assert
         $response->assertStatus(200);
-        $response->assertViewHas('tools', [
+        $response->assertViewHas('usertools', [
             UserTool::make(['name' => 'Hammer','type' => 'hardware tool','id'=>'1','user_id'=> '1']),
             UserTool::make(['name' => 'Screwdriver','type' => 'hardware tool','id'=>'2','user_id'=> '1']),
             UserTool::make(['name' => 'Lawn Mower','type' => 'garden tool','id'=>'3','user_id'=> '1'])

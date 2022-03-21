@@ -21,7 +21,7 @@ class AccountController extends Controller
     //this is controlle raction for the /games url of app
     public function show(){
         //controller action typically returns view
-        return view('tool-list', ['tools'=> $this->accountService->getTools()]);
+        return view('user-tool-list', ['usertools'=> $this->accountService->getTools()]);
     }
 
     public function view(int $id){
@@ -30,12 +30,12 @@ class AccountController extends Controller
         if ($tool == null) {
             throw new NotFoundHttpException();
         }
-        return view('tool-view', ['tool'=> $tool]);
+        return view('user-tool-view', ['tool'=> $tool]);
     }
 
     private function getToolById(int $id)
     {
-        $tool = $this->toolService->getToolById($id);
+        $tool = $this->accountService->getToolById($id);
 
         if ($tool == null) {
             throw new NotFoundHttpException();
