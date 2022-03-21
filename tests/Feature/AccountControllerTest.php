@@ -5,7 +5,7 @@ namespace Tests\Feature;
 use App\Services\AccountService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use App\Models\UserTool;
+use App\Models\Tool;
 use Tests\TestCase;
 use Mockery\MockInterface;
 
@@ -16,9 +16,9 @@ class AccountControllerTest extends TestCase {
 
     public static function getTools(){
         return [
-            UserTool::make(['name' => 'Hammer','type' => 'hardware tool','id'=>'1','user_id'=> '1']),
-            UserTool::make(['name' => 'Screwdriver','type' => 'hardware tool','id'=>'2','user_id'=> '1']),
-            UserTool::make(['name' => 'Lawn Mower','type' => 'garden tool','id'=>'3','user_id'=> '1'])
+            Tool::make(['name' => 'Hammer','type' => 'hardware tool','id'=>'1','user_id'=> '1']),
+            Tool::make(['name' => 'Screwdriver','type' => 'hardware tool','id'=>'2','user_id'=> '1']),
+            Tool::make(['name' => 'Lawn Mower','type' => 'garden tool','id'=>'3','user_id'=> '1'])
         ];
     }
 
@@ -33,9 +33,9 @@ class AccountControllerTest extends TestCase {
         $this->accountServiceSpy->shouldReceive('getTools')
             ->once()
             ->andReturn([
-                UserTool::make(['name' => 'Hammer','type' => 'hardware tool','id'=>'1','user_id'=> '1']),
-                UserTool::make(['name' => 'Screwdriver','type' => 'hardware tool','id'=>'2','user_id'=> '1']),
-                UserTool::make(['name' => 'Lawn Mower','type' => 'garden tool','id'=>'3','user_id'=> '1'])
+                Tool::make(['name' => 'Hammer','type' => 'hardware tool','id'=>'1','user_id'=> '1']),
+                Tool::make(['name' => 'Screwdriver','type' => 'hardware tool','id'=>'2','user_id'=> '1']),
+                Tool::make(['name' => 'Lawn Mower','type' => 'garden tool','id'=>'3','user_id'=> '1'])
             ]);
 
         // act
@@ -44,9 +44,9 @@ class AccountControllerTest extends TestCase {
         // assert
         $response->assertStatus(200);
         $response->assertViewHas('usertools', [
-            UserTool::make(['name' => 'Hammer','type' => 'hardware tool','id'=>'1','user_id'=> '1']),
-            UserTool::make(['name' => 'Screwdriver','type' => 'hardware tool','id'=>'2','user_id'=> '1']),
-            UserTool::make(['name' => 'Lawn Mower','type' => 'garden tool','id'=>'3','user_id'=> '1'])
+            Tool::make(['name' => 'Hammer','type' => 'hardware tool','id'=>'1','user_id'=> '1']),
+            Tool::make(['name' => 'Screwdriver','type' => 'hardware tool','id'=>'2','user_id'=> '1']),
+            Tool::make(['name' => 'Lawn Mower','type' => 'garden tool','id'=>'3','user_id'=> '1'])
         ]);
     }
 }

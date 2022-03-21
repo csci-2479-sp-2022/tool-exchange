@@ -2,15 +2,12 @@
 
 namespace App\Contracts;
 
-use App\Models\UserTool;
+use App\Models\Tool;
 
 interface AccountInterface
 {
-
-    function getToolById(int $id): ?UserTool;
-
     function getTools(): array;
 
-    function getToollistByUserId(int $id): ?UserTool;
+    function getToollistByUserId(int $id): ?Tool;
 
 }
