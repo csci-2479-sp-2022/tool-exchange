@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccountController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ToolController;
 
@@ -25,6 +26,11 @@ Route::get('/dashboard', function () {
 Route::controller(ToolController::class)->group(function(){
     Route::get('/tools', [ToolController::class, 'show'])->name('tools');
     Route::get('/tools/{id}', 'view');
+});
+
+Route::controller(AccountController::class)->group(function(){
+    Route::get('/usertools', [AccountController::class, 'show'])->name('usertools');
+    Route::get('/usertools/{id}', 'view');
 });
 
 Route::get('/search-results', function () {
