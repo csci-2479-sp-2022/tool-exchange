@@ -28,14 +28,6 @@ Route::controller(ToolController::class)->group(function(){
     Route::get('/tools/{id}', 'view');
 });
 
-<<<<<<< HEAD
-=======
-Route::controller(AccountController::class)->group(function(){
-    Route::get('/usertools', [AccountController::class, 'show'])->name('usertools');
-    Route::get('/usertools/{id}', 'view');
-});
-
->>>>>>> b72d12421e0aa8c214db1b1b17eed9cb82fa94ab
 Route::get('/search-results', function () {
     return view('search-results');
 });
