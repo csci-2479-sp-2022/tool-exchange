@@ -7,7 +7,8 @@
 2. clone this repo: `git clone git@github.com:csci-2479-sp-2022/tool-exchange.git`
 3. go into the project: `cd tool-exchange`
 4. copy the `.env.example` file to `.env`
-5. run the following docker command to install our Sail dependencies:
+5. make sure the DB_HOST in your `.env` file is set to `mysql`
+6. run the following docker command to install our Sail dependencies:
 ```
 docker run --rm \
     -u "$(id -u):$(id -g)" \
@@ -16,5 +17,5 @@ docker run --rm \
     laravelsail/php81-composer:latest \
     composer install --ignore-platform-reqs
 ```
-6. create app key: `./vendor/bin/sail artisan key:generate`
-7. start up the app: `./vendor/bin/sail up -d`
+6. start up the app: `./vendor/bin/sail up -d`
+7. create app key: `./vendor/bin/sail artisan key:generate`
