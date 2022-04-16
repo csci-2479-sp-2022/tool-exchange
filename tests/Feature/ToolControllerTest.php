@@ -15,11 +15,12 @@ class ToolControllerTest extends TestCase {
     private MockInterface $toolServiceSpy;
 
     public static function getTools(){
-        return [
-            Tool::make(['name' => 'Hammer','type' => 'hardware tool','id'=>'1']),
-            Tool::make(['name' => 'Screwdriver','type' => 'hardware tool','id'=>'2']),
-            Tool::make(['name' => 'Lawn Mower','type' => 'garden tool','id'=>'3'])
-        ];
+        return 
+        Tool::hydrate([
+            Tool::make(['name' => 'Hammer','type' => 'Hardware Tool','category_id'=>'1','user_id'=>1,'condition_id'=>1]),
+            Tool::make(['name' => 'Screwdriver','type' => 'Hardware Tool','category_id'=>'1','user_id'=>1,'condition_id'=>1]),
+            Tool::make(['name' => 'Lawn Mower','type' => 'Garden Tool','category_id'=>'1','user_id'=>1,'condition_id'=>1])
+        ]);
     }
 
     public function setUp(): void {
@@ -32,22 +33,26 @@ class ToolControllerTest extends TestCase {
         //arrange
         $this->toolServiceSpy->shouldReceive('getTools')
             ->once()
-            ->andReturn([
-                Tool::make(['name' => 'Hammer','type' => 'hardware tool','id'=>'1']),
-                Tool::make(['name' => 'Screwdriver','type' => 'hardware tool','id'=>'2']),
-                Tool::make(['name' => 'Lawn Mower','type' => 'garden tool','id'=>'3'])
-            ]);
+            ->andReturn(
+                Tool::hydrate([
+                    Tool::make(['name' => 'Hammer','type' => 'Hardware Tool','category_id'=>'1','user_id'=>1,'condition_id'=>1]),
+                    Tool::make(['name' => 'Screwdriver','type' => 'Hardware Tool','category_id'=>'1','user_id'=>1,'condition_id'=>1]),
+                    Tool::make(['name' => 'Lawn Mower','type' => 'Garden Tool','category_id'=>'1','user_id'=>1,'condition_id'=>1])
+                ])
+            );
 
         // act
         $response = $this->get('/tools');
 
         // assert
         $response->assertStatus(200);
-        $response->assertViewHas('tools', [
-            Tool::make(['name' => 'Hammer','type' => 'hardware tool','id'=>'1']),
-            Tool::make(['name' => 'Screwdriver','type' => 'hardware tool','id'=>'2']),
-            Tool::make(['name' => 'Lawn Mower','type' => 'garden tool','id'=>'3'])
-        ]);
+        $response->assertViewHas('tools', 
+        Tool::hydrate([
+            Tool::make(['name' => 'Hammer','type' => 'Hardware Tool','category_id'=>'1','user_id'=>1,'condition_id'=>1]),
+            Tool::make(['name' => 'Screwdriver','type' => 'Hardware Tool','category_id'=>'1','user_id'=>1,'condition_id'=>1]),
+            Tool::make(['name' => 'Lawn Mower','type' => 'Garden Tool','category_id'=>'1','user_id'=>1,'condition_id'=>1])
+        ])
+        );
     }
 
     public function test_get_tool_by_id() {
@@ -55,19 +60,17 @@ class ToolControllerTest extends TestCase {
        $this->toolServiceSpy->shouldReceive('getToolById')
         ->once()
         ->andReturn(
-            Tool::make(['name' => 'Screwdriver','type' => 'hardware tool','id'=>'2'])
+            Tool::make(['name' => 'Hammer','type' => 'Hardware Tool','category_id'=>'1','user_id'=>1,'condition_id'=>1])
         );
 
         // act
-        $response = $this->get('/tools/2');
+        $response = $this->get('/tools/1');
 
         // assert
         $response->assertStatus(200);
         $response->assertViewHas('tool',
-        Tool::make([
-            'name' => 'Screwdriver','type' => 'hardware tool','id'=>'2'
-        ])
-    );
+        Tool::make(['name' => 'Hammer','type' => 'Hardware Tool','category_id'=>'1','user_id'=>1,'condition_id'=>1])
+        );
     }
 
     public function test_invalid_id() {

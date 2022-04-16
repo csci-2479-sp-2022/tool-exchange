@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             CategorySeeder::class,
             ConditionSeeder::class,
-            
+            ToolSeeder::class,
         ]);
     }
 }
