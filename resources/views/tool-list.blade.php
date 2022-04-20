@@ -24,7 +24,7 @@
 <h1>Tool List</h1>
     <ul><h2>My Tools:</h2>
     @foreach($tools as $tool)
-        <li>{{$tool->type}} , <a href="/tools/{{$tool->id}}">view</a> </li>
+        <li>{{$tool->name}} , <a href="/tools/{{$tool->id}}">view</a> </li>
     @endforeach
 </body>
 </html>
