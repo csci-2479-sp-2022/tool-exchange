@@ -2,13 +2,13 @@
 
 namespace App\Contracts;
 
-use App\Models\Category;
+use App\Models\Condition;
 
-interface CategoryInterface
+interface ConditionInterface
 {
 
-    function getCategoryById(int $id): ?Category;
+    function getConditionById(int $id): ?Condition;
 
-    function getCategories(): array;
+    function getConditions(): array;
 
 }
