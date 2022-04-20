@@ -3,6 +3,7 @@ namespace App\Services;
 
 use App\Contracts\CategoryInterface;
 use App\Models\Category;
+use Illuminate\Database\Eloquent\Collection;
 
 class CategoryService implements CategoryInterface
 {
@@ -16,14 +17,9 @@ class CategoryService implements CategoryInterface
         return null;
     }
 
-    public function getCategories(): array
+    public function getCategories(): Collection
     {
-        return [
-            Category::make(['name' => 'Lawn and Garden','code' => 'LNG','id'=>'1']),
-            Category::make(['name' => 'Workshop','code' => 'WRK','id'=>'2']),
-            Category::make(['name' => 'Household','code' => 'HOU','id'=>'3']),
-            Category::make(['name' => 'Automotive','code' => 'CAR','id'=>'4']),
-        ];
+        return Category::all();
     }
 
 }
