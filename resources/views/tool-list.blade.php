@@ -5,6 +5,7 @@
         </h1>
     </x-slot>
 </x-app-layout>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
