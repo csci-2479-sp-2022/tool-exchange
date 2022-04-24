@@ -16,12 +16,15 @@
 <div class="topnav">
 <a href='/search-results'>
   <input type="text" placeholder="Search..">
-  <button>Search</button>    
+  <button>Search</button>
 </a>
 </div>
 <body>
 <h1>Tool List</h1>
     <ul><h2>My Tools:</h2>
+    <p>
+        <a href="{{route('tool-form')}}">Create new Tool List</a>
+    </p>
     @foreach($tools as $tool)
         <li>{{$tool->name}} , <a href="/tools/{{$tool->id}}">view</a> </li>
     @endforeach

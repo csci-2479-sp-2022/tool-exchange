@@ -1,13 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Auth;
+namespace App\Http\Requests;
 
-use Illuminate\Auth\Events\Lockout;
+use App\Models\Tool;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\RateLimiter;
-use Illuminate\Support\Str;
-use Illuminate\Validation\ValidationException;
+use Illuminate\Validation\Rule;
 
 class LoginRequest extends FormRequest
 {
@@ -28,66 +25,47 @@ class LoginRequest extends FormRequest
      */
     public function rules()
     {
+        $toolIds = self::getToolIds();
+
         return [
-            'email' => ['required', 'string', 'email'],
-            'password' => ['required', 'string'],
+            'name' => 'required|string',
+            'condition' => 'required|string',
+            'category' => 'required|string',
+            'tool' => [ Rule::in($toolIds) ]
         ];
     }
 
-    /**
-     * Attempt to authenticate the request's credentials.
-     *
-     * @return void
-     *
-     * @throws \Illuminate\Validation\ValidationException
-     */
-    public function authenticate()
+    public function getName(): string
     {
-        $this->ensureIsNotRateLimited();
-
-        if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
-            RateLimiter::hit($this->throttleKey());
-
-            throw ValidationException::withMessages([
-                'email' => __('auth.failed'),
-            ]);
-        }
-
-        RateLimiter::clear($this->throttleKey());
+        return $this->input('name');
     }
 
-    /**
-     * Ensure the login request is not rate limited.
-     *
-     * @return void
-     *
-     * @throws \Illuminate\Validation\ValidationException
-     */
-    public function ensureIsNotRateLimited()
+    public function getCondition(): string
     {
-        if (! RateLimiter::tooManyAttempts($this->throttleKey(), 5)) {
-            return;
-        }
-
-        event(new Lockout($this));
-
-        $seconds = RateLimiter::availableIn($this->throttleKey());
-
-        throw ValidationException::withMessages([
-            'email' => trans('auth.throttle', [
-                'seconds' => $seconds,
-                'minutes' => ceil($seconds / 60),
-            ]),
-        ]);
+        return $this->input('condition');
     }
 
-    /**
-     * Get the rate limiting throttle key for the request.
-     *
-     * @return string
-     */
-    public function throttleKey()
+    public function getCategory(): string
     {
-        return Str::lower($this->input('email')).'|'.$this->ip();
+        return $this->input('category');
+    }
+
+    public function getSystemId(): int
+    {
+        return $this->input('tool');
+    }
+
+    public function getCompletedBoolean(): bool
+    {
+        $completed = $this->input('completed');
+
+        return isset($completed);
+    }
+
+    private static function getToolIds(): array
+    {
+        $idRows = Tool::select('id')->get()->toArray();
+
+        return array_map(fn($row) => $row['id'], $idRows);
     }
 }

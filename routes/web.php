@@ -16,7 +16,7 @@ use App\Http\Controllers\ToolController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return phpinfo();
 });
 
 Route::get('/', function () {
@@ -40,5 +40,17 @@ Route::controller(AccountController::class)->group(function(){
 Route::get('/search-results', function () {
     return view('search-results');
 });
+
+Route::get('form-validation', 'AccountController@formValidation');
+
+Route::post('form-validation', 'AccountController@formValidationPost');
+
+Route::get('/tools', [AccountController::class, 'show'])
+    ->name('toollist');
+
+Route::get('/tools', [AccountController::class, 'validate']);
+
+Route::post('/tools', [AccountController::class, 'create'])
+    ->name('tool-form');
 
 require __DIR__.'/auth.php';
