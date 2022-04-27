@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Models\Pet;
+use App\Models\Tool;
 use App\Contracts\SearchResultInterface;
 use App\Services\ToolService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
