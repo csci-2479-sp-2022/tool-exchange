@@ -9,7 +9,9 @@
 <body>
 <h1>
     Available tools:
-
+    @foreach($tools as $tool)
+    <p>{{$tool->name}}</p>
+    @endforeach
 </h1>
 </body>
 </html>

@@ -14,8 +14,8 @@
     <title>Week 3</title>
 </head>
 <div class="topnav">
-<a href='/search-results'>
   <input type="text" placeholder="Search..">
+  <a href='/search-results'>
   <button>Search</button>    
 </a>
 </div>
