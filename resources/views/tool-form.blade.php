@@ -34,11 +34,20 @@
             </div>
             <div>
                 <label for="category">Tool Category</label>
-                <input type="dropdown" name="category" id="category">
+                <select name="category" id="category">
+                <option value="garden">Garden</option>
+                <option value="house">House</option>
+                <option value="hand">Hand</option>
+                <option value="power">Power</option>
+            </select>
             </div>
             <div>
                 <label for="condition">Tool Condition</label>
-                <input type="dropdown" name="condition" id="condition">
+                <select name="condition" id="condition">
+                <option value="good">Good</option>
+                <option value="rust">Rusted</option>
+                <option value="new">Mint Condition</option>
+            </select>
             </div>
             <div>
                 <button type="save">Save Tools</button>

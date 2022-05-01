@@ -16,8 +16,13 @@ use function PHPSTORM_META\type;
 
 class ToolController extends Controller
 {
-    //this is controlle raction for the /games url of app
-    public function show(){
+    public function __construct(private ToolInterface $toolService)
+    {
+
+    }
+    //this is controller action for the /games url of app
+    public function show()
+    {
         //controller action typically returns view
         return view('tool-list', ['tools'=> $this->toolService->getTools()]);
     }
@@ -39,7 +44,8 @@ class ToolController extends Controller
         return response()->redirectToRoute('tool-list');
     }
 
-    private static function saveTool(ToolRequest $request): void {
+    private static function saveTool(ToolRequest $request): void
+    {
         $tool = Tool::find($request->getToolById());
 
         $tool = Tool::make([
@@ -58,7 +64,8 @@ class ToolController extends Controller
         return Tool::orderBy('name')->get();
     }
 
-    public function view(int $id){
+    public function view(int $id)
+    {
         //controller action typically returns view
         $tool = $this->toolService->getToolById($id);
         if ($tool == null) {
