@@ -13,7 +13,7 @@
                     <h1>Welcome {{Auth::user()->name}} to tool exchange!!</h1>
                     <h2>Email: {{Auth::user()->email}}</h2>
                     <p>
-        <a href="{{route('tool-form')}}">Create New Tool Rental List</a>
+        <a href="{{route('tool-form')}}">List Tools For Rental</a>
     </p>
                 </div>
             </div>
