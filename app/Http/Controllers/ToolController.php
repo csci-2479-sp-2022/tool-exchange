@@ -4,13 +4,21 @@ namespace App\Http\Controllers;
 use App\Contracts\ToolInterface;
 use App\Http\Requests\ToolRequest;
 use App\Models\Tool;
+use App\Models\Category;
+use App\Models\Condition;
 use App\Services\ToolService;
+use App\Services\CategoryService;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 
 use function PHPSTORM_META\type;
 
@@ -30,7 +38,7 @@ class ToolController extends Controller
     public function index()
     {
         return view('tool-form', [
-            'tools' => self::getTools(),
+            'tools' => self::getTools(), 'categories' => self::getCategories(), 'conditions' => self::getConditions()
         ]);
     }
 
@@ -41,28 +49,48 @@ class ToolController extends Controller
 
 
         // redirect to tool list page
-        return response()->redirectToRoute('tool-list');
+        return response()->redirectToRoute('tools');
     }
 
     private static function saveTool(ToolRequest $request): void
     {
-        $tool = Tool::find($request->getToolById());
+        $category = $request->getCategoryName();
+        //$condition = Condition::find($request->getConditionId());
 
         $tool = Tool::make([
             'name' => $request->getName(),
-            'category' => $request->getCategory(),
-            'listForRent' => $request->getListForRent(),
-        ]);
+            'type' => $request->getCategoryName(),
+            'category_id' => $request->getCategoryID(),
+            'user_id' => '',
+            'condition_id'=>$request->getCondition()
+         ]);
 
-        $tool->tool()->associate($tool);
+        /*
+        $tool->category()->associate($category);
+        $tool->condition()->associate($condition);
+        */
 
         $tool->save();
+
+        Cache::forget('gamelist');
+        Log::debug('gamelist cache cleared');
     }
 
     private static function getTools()
     {
         return Tool::orderBy('name')->get();
     }
+
+    private static function getConditions()
+    {
+        return Condition::orderBy('name')->get();
+    }
+    private static function getCategories()
+    {
+        return Category::orderBy('name')->get();
+    }
+
+
 
     public function view(int $id)
     {
@@ -73,6 +101,8 @@ class ToolController extends Controller
         }
         return view('tool-view', ['tool'=> $tool]);
     }
+
+
 
     private function getToolById(int $id)
     {

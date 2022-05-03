@@ -45,12 +45,9 @@ Route::get('/search-results', function () {
     return phpinfo();
 });
  */
-Route::get('/Tools', [ToolController::class, 'show'])
-    ->name('tool-list');
 
 Route::get('/tool', [ToolController::class, 'index']);
 
-Route::post('/tool', [ToolController::class, 'create'])
-    ->name('tool-form');
+Route::post('/tool', [ToolController::class, 'create'])->middleware(['auth'])->name('tool-form');
 
 require __DIR__.'/auth.php';
