@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>My Tool List</title>
+    <title>Document</title>
     <style>
         form > div {
             margin: 10px 0;
@@ -14,7 +14,7 @@
 <body>
     <h1>Tool form</h1>
     <p>
-        <a href="{{route('toollist')}}">Back to home</a>
+        <a href="{{route('tool-list')}}">Back to tool list</a>
     </p>
     <div>
         @if ($errors->any())
@@ -29,29 +29,28 @@
         <form action="/tool-list" method="post" enctype="multipart/form-data">
             @csrf
             <div>
-                <label for="title">Tool List</label>
-                <input type="text" name="list" id="list">
+                <label for="tool name">Tool Name</label>
+                <input type="text" name="tool name" id="tool name">
             </div>
             <div>
-                <label for="tool-name">Tool Name</label>
-                <input type="text" name="year" id="year">
+                <label for="category">Tool Category</label>
+                <select name="category" id="category">
+                <option value="garden">Garden</option>
+                <option value="house">House</option>
+                <option value="hand">Hand</option>
+                <option value="power">Power</option>
+            </select>
             </div>
             <div>
-                <label for="tool-category">Tool Category</label>
-                <input type="text" name="category" id="category">
+                <label for="condition">Tool Condition</label>
+                <select name="condition" id="condition">
+                <option value="good">Good</option>
+                <option value="rust">Rusted</option>
+                <option value="new">Mint Condition</option>
+            </select>
             </div>
             <div>
-                <label for="tool-type">Tool Type</label>
-                <input type="text" name="type" id="type">
-            </div>
-            <div>
-                <label for="list-for-rent">
-                    <input type="checkbox" name="list for rent" id="list for rent">
-                    List For Rent
-                </label>
-            </div>
-            <div>
-                <button type="submit">Save Tools</button>
+                <button type="save">Save Tools</button>
             </div>
         </form>
     </div>

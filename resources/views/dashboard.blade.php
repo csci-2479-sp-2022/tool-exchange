@@ -12,6 +12,9 @@
                     You're logged in!
                     <h1>Welcome {{Auth::user()->name}} to tool exchange!!</h1>
                     <h2>Email: {{Auth::user()->email}}</h2>
+                    <p>
+        <a href="{{route('tool-form')}}">List Tools For Rental</a>
+    </p>
                 </div>
             </div>
         </div>
