@@ -41,4 +41,13 @@ Route::get('/search-results', function () {
     return view('search-results');
 });
 
+/* Route::get('/', function () {
+    return phpinfo();
+});
+ */
+
+Route::get('/tool', [ToolController::class, 'index']);
+
+Route::post('/tool', [ToolController::class, 'create'])->middleware(['auth'])->name('tool-form');
+
 require __DIR__.'/auth.php';
