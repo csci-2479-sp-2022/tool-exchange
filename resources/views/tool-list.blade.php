@@ -1,3 +1,10 @@
+<x-app-layout>
+    <x-slot name="header">
+        <h1 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Tools') }}
+        </h1>
+    </x-slot>
+</x-app-layout>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,7 +23,7 @@
 <h1>Tool List</h1>
     <ul><h2>My Tools:</h2>
     @foreach($tools as $tool)
-        <li>{{$tool->type}} , <a href="/tools/{{$tool->id}}">view</a> </li>
+        <li>{{$tool->name}} , <a href="/tools/{{$tool->id}}">view</a> </li>
     @endforeach
 </body>
 </html>

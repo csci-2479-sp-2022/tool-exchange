@@ -19,6 +19,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/', function () {
+    return view('homepage');
+})->name('home');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
@@ -36,5 +40,14 @@ Route::controller(AccountController::class)->group(function(){
 Route::get('/search-results', function () {
     return view('search-results');
 });
+
+/* Route::get('/', function () {
+    return phpinfo();
+});
+ */
+
+Route::get('/tool', [ToolController::class, 'index']);
+
+Route::post('/tool', [ToolController::class, 'create'])->middleware(['auth'])->name('tool-form');
 
 require __DIR__.'/auth.php';

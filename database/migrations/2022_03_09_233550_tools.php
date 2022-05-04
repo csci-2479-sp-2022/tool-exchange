@@ -14,7 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tools', function (Blueprint $table) {
+            $table->increments('id');
             $table->string('name');
+            $table->string('type');
             $table->foreignId('category_id');
             $table->foreignId('user_id');
             $table->foreignId('condition_id');

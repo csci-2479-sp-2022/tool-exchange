@@ -9,6 +9,7 @@
 <body>
 <h1></h1>
     <ul><h2>My tools:</h2>
+
     {{$tool->toString()}}
 </body>
 </html>
