@@ -12,6 +12,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 
 class SearchController extends Controller{
+  
     public function __construct(
         private ToolInterface $toolService
     ) {

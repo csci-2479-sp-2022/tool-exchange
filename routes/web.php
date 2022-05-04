@@ -40,4 +40,13 @@ Route::controller(AccountController::class)->group(function(){
 
 Route::get('/search-results', [SearchController::class, 'searchResults']);
 
+/* Route::get('/', function () {
+    return phpinfo();
+});
+ */
+
+Route::get('/tool', [ToolController::class, 'index']);
+
+Route::post('/tool', [ToolController::class, 'create'])->middleware(['auth'])->name('tool-form');
+
 require __DIR__.'/auth.php';
