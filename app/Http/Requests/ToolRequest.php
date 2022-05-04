@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 use App\Models\Tool;
+use App\Models\Category;
+use App\Models\Condition;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -24,23 +26,35 @@ class ToolRequest extends FormRequest
      */
     public function rules()
     {
-        $toolIds = self::getToolIds();
+        return [];
+        /*
+        $conditionIds = self::getConditionIds();
 
         return [
             'name' => 'required| string',
             'category' => 'required',
-            'tool' => [Rule::in($toolIds) ],
+            'tool' => [Rule::in($conditionIds)],
         ];
+        */
     }
 
     public function getName(): string
     {
-        return $this->input('name');
+        return $this->input('tool_name');
     }
 
-    public function getCategory(): string
+    public function getCategoryID(): string
     {
-        return $this->input('category');
+        return explode(',', $this->input('category'))[0];
+    }
+    public function getCategoryName(): string
+    {
+        return explode(',', $this->input('category'))[1];
+    }
+
+    public function getCondition() : string
+    {
+        return $this->input('condition');
     }
 
     public function getToolById(): int
@@ -61,5 +75,10 @@ class ToolRequest extends FormRequest
 
         return array_map(fn($row) => $row['id'], $idRows);
     }
+
+
+
+
+
 
 }

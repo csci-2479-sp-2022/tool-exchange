@@ -14,7 +14,7 @@
 <body>
     <h1>Tool form</h1>
     <p>
-        <a href="{{route('tool-list')}}">Back to tool list</a>
+        <a href="{{route('tools')}}">Back to tool list</a>
     </p>
     <div>
         @if ($errors->any())
@@ -26,29 +26,28 @@
                 </ul>
             </div>
         @endif
-        <form action="/tool-list" method="post" enctype="multipart/form-data">
+        <form action="/tool" method="post" enctype="multipart/form-data">
             @csrf
             <div>
                 <label for="tool name">Tool Name</label>
-                <input type="text" name="tool name" id="tool name">
+                <input type="text" name="tool name" id="tool_name">
             </div>
-            <div>
-                <label for="category">Tool Category</label>
+            <label for="category">Category</label>
                 <select name="category" id="category">
-                <option value="garden">Garden</option>
-                <option value="house">House</option>
-                <option value="hand">Hand</option>
-                <option value="power">Power</option>
-            </select>
-            </div>
-            <div>
-                <label for="condition">Tool Condition</label>
+                    <option value=""></option>
+                    @foreach($categories as $category)
+                        <option value="{{$category->id}},{{$category->name}}">{{$category->name}}</option>
+                    @endforeach
+                </select>
+                <br>
+                <br>
+                <label for="condition">Condition</label>
                 <select name="condition" id="condition">
-                <option value="good">Good</option>
-                <option value="rust">Rusted</option>
-                <option value="new">Mint Condition</option>
-            </select>
-            </div>
+                    <option value=""></option>
+                    @foreach($conditions as $condition)
+                        <option value="{{$condition->id}}">{{$condition->name}}</option>
+                    @endforeach
+                </select>
             <div>
                 <button type="save">Save Tools</button>
             </div>
