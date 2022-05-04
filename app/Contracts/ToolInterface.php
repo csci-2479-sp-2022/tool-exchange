@@ -3,7 +3,8 @@
 namespace App\Contracts;
 
 use App\Models\Tool;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Collection;
+
 
 interface ToolInterface
 {

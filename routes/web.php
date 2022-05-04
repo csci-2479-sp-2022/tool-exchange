@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ToolController;
 
@@ -37,8 +38,6 @@ Route::controller(AccountController::class)->group(function(){
     Route::get('/usertools/{id}', 'view');
 });
 
-Route::get('/search-results', function () {
-    return view('search-results');
-});
+Route::get('/search-results', [SearchController::class, 'searchResults']);
 
 require __DIR__.'/auth.php';
